@@ -3,8 +3,9 @@
 declare(strict_types=1);
 
 use Momentum\Lock\Tests\Stubs\User;
+use Momentum\Lock\Tests\TestCase;
 
-uses(Momentum\Lock\Tests\TestCase::class)->in('Pest');
+uses(TestCase::class)->in('Pest');
 
 function user(): User
 {

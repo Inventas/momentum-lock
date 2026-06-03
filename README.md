@@ -4,12 +4,14 @@ Momentum Lock is a Laravel package that lets you handle Laravel authorizations o
 
 The package is only intended to work with [Laravel Data](https://github.com/spatie/laravel-data) objects and [TypeScript Transformer](https://github.com/spatie/laravel-typescript-transformer).
 
+> [!NOTE]
+> Inventas maintains this repository as a fork of [`lepikhinb/momentum-lock`](https://github.com/lepikhinb/momentum-lock). We adopted the package because the upstream project appears inactive and we need ongoing Laravel support, including Laravel 13.
+
 - [**Installation**](#installation)
   - [**Laravel**](#laravel)
   - [**Frontend**](#frontend)
 - [**Usage**](#usage)
-- [**Advanced Inertia**](#advanced-inertia)
-- [**Momentum**](#momentum)
+- [**Credits**](#credits)
 
 ## Installation
 
@@ -18,14 +20,16 @@ The package is only intended to work with [Laravel Data](https://github.com/spat
 Install the package into your Laravel app.
 
 ```bash
-composer require based/momentum-lock
+composer require inventas/momentum-lock
 ```
+
+This fork is tested against Laravel 12 and Laravel 13.
 
 ### Frontend
 
 The frontend package is framework-agnostic and will work great within any TypeScript-powered workflow.
 
-Install the [frontend package](https://github.com/lepikhinb/momentum-lock-helper).
+Install the upstream [frontend package](https://github.com/lepikhinb/momentum-lock-helper).
 
 ```bash
 npm i momentum-lock
@@ -84,35 +88,16 @@ const props = defineProps<{
 
 <template>
   <div v-for="user in users" :key="user.id">
-    <a v-if="can(user, 'edit')" :href="route('users.edit', user)"> Edit </a>
+    <a v-if="can(user, 'update')" :href="route('users.edit', user)"> Edit </a>
   </div>
 </template>
 ```
 
-## Advanced Inertia
-
-[<img src="https://advanced-inertia.com/og.png" width="420px" />](https://advanced-inertia.com)
-
-Take your Inertia.js skills to the next level with my book [Advanced Inertia](https://advanced-inertia.com/).
-Learn advanced concepts and make apps with Laravel and Inertia.js a breeze to build and maintain.
-
-## Momentum
-
-Momentum is a set of packages designed to improve your experience building Inertia-powered apps.
-
-- [Modal](https://github.com/lepikhinb/momentum-modal) — Build dynamic modal dialogs for Inertia apps
-- [Preflight](https://github.com/lepikhinb/momentum-preflight) — Realtime backend-driven validation for Inertia apps
-- [Paginator](https://github.com/lepikhinb/momentum-paginator) — Headless wrapper around Laravel Pagination
-- [Trail](https://github.com/lepikhinb/momentum-trail) — Frontend package to use Laravel routes with Inertia
-- [Lock](https://github.com/lepikhinb/momentum-lock) — Frontend package to use Laravel permissions with Inertia
-- [Layout](https://github.com/lepikhinb/momentum-layout) — Persistent layouts for Vue 3 apps
-- [Vite Plugin Watch](https://github.com/lepikhinb/vite-plugin-watch) — Vite plugin to run shell commands on file changes
-
 ## Credits
 
-- [Boris Lepikhin](https://twitter.com/lepikhinb)
-- [All Contributors](../../contributors)
+- Original package by [Boris Lepikhin](https://github.com/lepikhinb)
+- Maintained fork by [Inventas](https://github.com/Inventas)
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT). Please see [LICENSE](LICENSE) for more information.

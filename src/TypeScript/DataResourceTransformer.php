@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Momentum\Lock\TypeScript;
 
+use Illuminate\Database\Eloquent\Model;
 use Momentum\Lock\Lock;
 use ReflectionClass;
 use Spatie\LaravelData\Support\TypeScriptTransformer\DataTypeScriptTransformer;
@@ -11,6 +12,9 @@ use Spatie\TypeScriptTransformer\Structures\MissingSymbolsCollection;
 
 class DataResourceTransformer extends DataTypeScriptTransformer
 {
+    /**
+     * @param  ReflectionClass<object>  $class
+     */
     protected function transformExtra(
         ReflectionClass $class,
         MissingSymbolsCollection $missingSymbols,
@@ -20,7 +24,7 @@ class DataResourceTransformer extends DataTypeScriptTransformer
         if (! $abilities) {
             $modelClass = $class->getProperty('modelClass')->getDefaultValue();
 
-            /** @var \Illuminate\Database\Eloquent\Model $model */
+            /** @var Model $model */
             $model = new $modelClass;
 
             $abilities = Lock::getAbilitiesFromPolicy($model);

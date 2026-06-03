@@ -1,6 +1,7 @@
 <?php
 
 use Momentum\Lock\Lock;
+
 use function Pest\Laravel\actingAs;
 use function PHPUnit\Framework\assertArrayHasKey;
 use function PHPUnit\Framework\assertArrayNotHasKey;

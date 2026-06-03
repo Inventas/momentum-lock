@@ -14,7 +14,7 @@ class DataResource extends Data
 {
     protected ?Model $model;
 
-    /** @var null|array */
+    /** @var list<string>|null */
     protected $permissions = null;
 
     protected string $modelClass;

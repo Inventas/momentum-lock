@@ -7,12 +7,16 @@ namespace Momentum\Lock;
 use Closure;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Gate;
-use Laravel\SerializableClosure\Support\ReflectionClosure;
 use ReflectionClass;
+use ReflectionFunction;
 use ReflectionMethod;
 
 class Lock
 {
+    /**
+     * @param  list<string>|null  $abilities
+     * @return array<string, bool>
+     */
     public static function getPermissions(mixed $model, ?array $abilities = null): array
     {
         $abilities ??= static::getAbilitiesFromPolicy($model);
@@ -22,6 +26,10 @@ class Lock
             ->toArray();
     }
 
+    /**
+     * @param  list<string>|null  $abilities
+     * @return array<string, bool>
+     */
     public static function getGlobalPermissions(?array $abilities = null): array
     {
         return collect(Gate::abilities())
@@ -30,7 +38,7 @@ class Lock
                     return false;
                 }
 
-                $reflection = new ReflectionClosure($closure);
+                $reflection = new ReflectionFunction($closure);
 
                 return $reflection->getNumberOfParameters() === 1;
             })
@@ -38,14 +46,20 @@ class Lock
             ->toArray();
     }
 
+    /**
+     * @return list<string>
+     */
     public static function getAbilitiesFromPolicy(Model $model): array
     {
         $policy = Gate::getPolicyFor($model);
 
         $reflection = new ReflectionClass($policy);
 
-        return collect($reflection->getMethods(ReflectionMethod::IS_PUBLIC))
-            ->map(fn (ReflectionMethod $method) => $method->getName())
-            ->toArray();
+        $abilities = array_map(
+            static fn (ReflectionMethod $method): string => $method->getName(),
+            $reflection->getMethods(ReflectionMethod::IS_PUBLIC),
+        );
+
+        return $abilities;
     }
 }

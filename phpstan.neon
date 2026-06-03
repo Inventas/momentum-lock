@@ -13,6 +13,3 @@ parameters:
     ignoreErrors:
         -
             message: '#Unable to resolve the template type#'
-            
-    checkMissingIterableValueType: false
-    checkGenericClassInNonGenericObjectType: false

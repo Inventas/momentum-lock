@@ -11,6 +11,9 @@ use Spatie\TypeScriptTransformer\Structures\TransformedType;
 
 class DataResourceCollector extends Collector
 {
+    /**
+     * @param  ReflectionClass<object>  $class
+     */
     public function getTransformedType(ReflectionClass $class): ?TransformedType
     {
         if (! $class->isSubclassOf(DataResource::class)) {
